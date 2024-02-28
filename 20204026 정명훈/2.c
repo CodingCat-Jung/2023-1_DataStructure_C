@@ -1,131 +1,68 @@
-// 2번. 정수값을 입력 받아 피보나치 수열 계산하고 결과 출력
-// 원형 큐에 f(0), f(1)의 값이 들어가 있어 f(2) 계산할 때 f(0) 제거 후 그 다음 계산된 f(b)를 넣음
-
 #include<stdio.h>
-#include<stdlib.h>
-
-typedef int element;
-typedef struct QueueNode {
-    element data;
-    struct QueueNode* link;
-}QueueNode;
-
+#include<ctype.h>
+#pragma warning (disable : 4996)
+#define STACK_SIZE 100
+#define SIZE 20
+typedef char element;
 typedef struct {
-    QueueNode* front, * rear;
-}LinkedQueueType;
+	element data[STACK_SIZE];
+	int top;
+} stack;
 
-void init(LinkedQueueType* q)
-{
-    q->front = q->rear = 0;
+void stack_init(stack* s) {
+	s->top = -1;
 }
-int is_empty(LinkedQueueType* q)
-{
-    return (q->front == NULL);
+int is_full(stack* s) {
+	return (s->top == (STACK_SIZE - 1));
 }
-int is_full(LinkedQueueType* q)
-{
-    return 0;
+int is_empty(stack* s) {
+	return (s->top == -1);
 }
-int enqueue(LinkedQueueType* q, element data)
-{
-    QueueNode* temp = (QueueNode*)malloc(sizeof(QueueNode));
-    temp->data = data;
-    temp->link = NULL;
-    if (is_empty(q))
-    {
-        q->front = temp;
-        q->rear = temp;
-
-    }
-    else
-    {
-        q->rear->link = temp;
-        q->rear = temp;
-    }
+void push(stack* s, element item) {
+	s->data[++(s->top)] = item;
+}
+element pop(stack* s) {
+	return s->data[(s->top)--];
+}
+element peek(stack* s) {
+	return s->data[s->top];
 }
 
-int dequeue(LinkedQueueType* q)
-{
-    QueueNode* temp = q->front;
-    element data;
-    if (is_empty(q))
-    {
-        fprintf(stderr, "스택이 비어있음\n");
-        exit(1);
-    }
-    else {
-        data = temp->data;
-        q->front = q->front->link;
-        if (q->front == NULL)
-            q->rear = NULL;
-        free(temp);
-        return data;
-    }
+int main() {
 
-}
-int QueuePeek(LinkedQueueType* q)
-{
-    QueueNode* temp = q->front;
-    element data;
-    if (is_empty(q))
-    {
-        fprintf(stderr, "스택이 비어있음\n");
-        exit(1);
-    }
-    else {
-        data = temp->data;
-        q->front = q->front->link;
-        if (q->front == NULL)
-            q->rear = NULL;
-        free(temp);
-        enqueue(q, data);
-        return data;
-    }
+	char str[SIZE] = "";
+	int count = 0;
+	int count1 = 0;
 
-}
-void print_queue(LinkedQueueType* q)
-{
-    QueueNode* p;
-    for (p = q->front; p != NULL; p = p->link)
-        printf("%d->", p->data);
-    printf("NULL\n");
-}
-int main(void)
-{
-    // 1. 정수값을 입력 받음
-    LinkedQueueType queue;
-    init(&queue);
+	// 1. 스택 정의
+	stack s;
+	stack_init(&s);
 
-    int n;
-    printf("정수값을 입력하세요: ");
-    scanf("%d", &n);
+	stack s1;
+	stack_init(&s);
 
-    enqueue(&queue, 0);
-    enqueue(&queue, 1);
-    //enqueue(&queue, 1);
+	// 2. 문자열 입력 받음
+	printf("문자열을 입력하시오: ");
+	scanf("%s", str);
 
-    // print_queue(&queue);
+	// 3. 문자열 압축과 출력
+	for (int i = 0; i < SIZE; i++) {
+		char chr = tolower(str[i]);
 
-    // 2. 피보나치 수열 계산 
-    // F(n) = F(n-1) + F(n-2)
-    // 0 1 1 2 3 5 8 13 ...
-
-    // n까지 피보나치 수열 계산
-
-    element result = 0;
-    for (int i = 0; i < n; i++) {
-        element before = QueuePeek(&queue);
-        result = dequeue(&queue); + dequeue(&queue);
-        //dequeue(&queue);
-        enqueue(&queue, before);
-        enqueue(&queue, result);
-        //enqueue(&queue, result);
-    }
-    
-
-    // 3. 결과 출력
-    printf("피보나치 수열 F(%d)은 %d입니다.\n", n, result);
-    
-    
-    return 0;
+		// 3-1. 비어있거나 문자열이 스택 맨 위 요소와 같으면
+		if (is_empty(&s) || chr == peek(&s)) {
+			count++;
+			push(&s, chr);
+		}
+		
+		// 3-2. 다른 문자가 나오면 
+		else if (chr != peek(&s)) {
+			printf("%d%c", count, peek(&s));
+			count = 0; // count 초기화
+			while (!is_empty(&s)) // 스택 비워줌
+				pop(&s);
+			i--;
+		}
+	}
+	return 0;
 }

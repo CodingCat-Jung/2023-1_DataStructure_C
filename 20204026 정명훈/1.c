@@ -1,78 +1,68 @@
-// 1번. 정수를 입력 받아서 순서를 거꾸로 하는 프로그램
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#pragma warning (disable : 4996)
 
-typedef int element;
+typedef struct {
+	int x;
+	int y;
+}dot;
 
-typedef struct ListNode {
-    element data;
-    struct ListNode* prev;
-    struct ListNode* next;
-} ListNode;
-
-void printReverseList(ListNode* head) {
-    ListNode* current = head;
-
-    // 마지막 노드를 찾기 위해 끝까지 이동
-    while (current->next != NULL) {
-        current = current->next;
-    }
-
-    // 마지막 노드부터 역순으로 출력
-    while (current != NULL) {
-        printf("%d ", current->data);
-        current = current->prev;
-    }
-
-    printf("\n");
+int check(dot *d)
+{
+	if (d->x > 0) {
+		if (d->y > 0)
+			return 1;
+		else
+			return 4;
+	}
+	if (d->x < 0) {
+		if (d->y > 0)
+			return 2;
+		else
+			return 3;
+	}
 }
 
 int main() {
-    // 1. 정수 배열 크기 입력 받음
-    int size;
-    printf("정수 배열의 크기는? ");
-    scanf("%d", &size);
+	// 1. 파일 오픈
+	FILE* fp = fopen("data.txt", "r");
+	if (fp == NULL) {
+		printf("파일 읽기 실패\n");
+		return;
+	}
 
-    // 2. 입력한 정수 개수 만큼 정수를 입력받음
+	int x, y;
+	int arr[1024];
+	int a = 0;
+	// 2. 동적 할당
+	int count;
+	while (!feof(fp)) {
+		fscanf(fp, "%d", &arr[a]);
+		a++;
+		count++;
+	}
 
-    // 이중 연결 리스트 생성 및 데이터 추가
-    ListNode* head = NULL;
-    ListNode* tail = NULL;
+	dot* d1;
+	d1 = (dot*)malloc(sizeof(dot));
+	
 
-    for (int i = 0; i < size; i++) {
-        ListNode* newNode = (ListNode*)malloc(sizeof(ListNode));
 
-        int n;
-        printf("정수를 입력하세요: ");
-        scanf("%d", &n);
-        newNode->data = n;
-        newNode->prev = NULL;
-        newNode->next = NULL;
+	// 3. 좌표 읽어서 저장
+	int j = 0;
+	for (int i = 0; i < count; i++) {
+		d1->x = arr[i++];
+		d1->y = arr[j++];
+	}
 
-        if (head == NULL) {
-            head = newNode;
-            tail = newNode;
-        }
-        else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
-        }
-    }
+	// 4. 사분면 확인
+	for (int i = 0; i < count; i++) {
+		printf("%d %d는 %d사분면입니다.\n", d1->x, d1->y, check(d1));
+	}
 
-    // 3. 이중 연결 리스트를 역순으로 출력
-    printf("반전된 정수 배열 : ");
-    printReverseList(head);
+	// 5. 메모리 반납 및 파일포인터 종료
+	free(d1);
+	fclose(fp);
+	return 0;
 
-    // 이중 연결 리스트 메모리 해제
-    ListNode* current = head;
-    while (current != NULL) {
-        ListNode* temp = current;
-        current = current->next;
-        free(temp);
-    }
-
-    return 0;
 }
+
