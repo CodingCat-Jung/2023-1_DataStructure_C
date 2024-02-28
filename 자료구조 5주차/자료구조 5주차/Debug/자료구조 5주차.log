@@ -1,0 +1,4 @@
+﻿  queue4.c
+C:\Users\SAMSUNG\Desktop\자료구조\자료구조 5주차\자료구조 5주차\queue4.c(68,7): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\SAMSUNG\Desktop\자료구조\자료구조 5주차\자료구조 5주차\queue4.c(78,3): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  자료구조 5주차.vcxproj -> C:\Users\SAMSUNG\Desktop\자료구조\자료구조 5주차\Debug\자료구조 5주차.exe
