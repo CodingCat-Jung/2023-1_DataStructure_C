@@ -1,0 +1,10 @@
+﻿  4.c
+C:\Users\SAMSUNG\Desktop\자료구조\8주차 자료구조 실습 과제\8주차 자료구조 실습 과제\4.c(32,9): warning C4033: 'insert'은(는) 값을 반환해야 합니다.
+C:\Users\SAMSUNG\Desktop\자료구조\8주차 자료구조 실습 과제\8주차 자료구조 실습 과제\4.c(40,19): warning C4133: '=': 'LinkNode *'과(와) 'ListNode *' 사이의 형식이 호환되지 않습니다.
+C:\Users\SAMSUNG\Desktop\자료구조\8주차 자료구조 실습 과제\8주차 자료구조 실습 과제\4.c(43,16): warning C4133: '=': 'ListNode *'과(와) 'LinkNode *' 사이의 형식이 호환되지 않습니다.
+C:\Users\SAMSUNG\Desktop\자료구조\8주차 자료구조 실습 과제\8주차 자료구조 실습 과제\4.c(56,49): warning C4133: '=': 'LinkNode *'과(와) 'ListNode *' 사이의 형식이 호환되지 않습니다.
+C:\Users\SAMSUNG\Desktop\자료구조\8주차 자료구조 실습 과제\8주차 자료구조 실습 과제\4.c(66,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\SAMSUNG\Desktop\자료구조\8주차 자료구조 실습 과제\8주차 자료구조 실습 과제\4.c(75,3): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\SAMSUNG\Desktop\자료구조\8주차 자료구조 실습 과제\8주차 자료구조 실습 과제\4.c(82,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\SAMSUNG\Desktop\자료구조\8주차 자료구조 실습 과제\8주차 자료구조 실습 과제\4.c(47): warning C4715: 'insert': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  8주차 자료구조 실습 과제.vcxproj -> C:\Users\SAMSUNG\Desktop\자료구조\8주차 자료구조 실습 과제\Debug\8주차 자료구조 실습 과제.exe
